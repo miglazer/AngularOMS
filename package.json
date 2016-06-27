@@ -2,12 +2,13 @@
   "name": "oms",
   "private": true,
   "scripts": {
-     "start": "live-server"
+    "start": "live-server"
   },
   "dependencies": {
-    "angular": "^1.5.7"
+    "angular": "^1.5.7",
+    "angular-route": "^1.5.7",
+    "bootstrap": "^3.3.6"
   },
-
   "devDependencies": {
     "live-server": "^1.0.0"
   }
