@@ -1,0 +1,18 @@
+<form name="orderForm" novalidate>
+    <div class="form-group" ng-class="{'has-error': orderForm.symbol.$error.minlength || orderForm.symbol.$error.required}">
+        <label for="symbol">Symbol:</label>
+        <input type="text" required name="symbol" minlength="2" class="form-control" ng-model="ctrl.order.symbol" id="symbol">
+        <span class="help-block" ng-show="orderForm.symbol.$error.required">A block of help text that breaks onto a new line and may extend beyond one line.</span>
+        <span class="help-block" ng-show="orderForm.symbol.$error.minlength">A different of help text that breaks onto a new line and may extend beyond one line.</span>
+    </div>
+    <div class="form-group" ng-class="{'has-error': orderForm.qty.$error.min || orderForm.qty.$error.required}">
+        <label for="qty">Quantity:</label>
+        <input type="number" required name="qty" min="1.0" class="form-control" ng-model="ctrl.order.qty" id="qty">
+        <span class="help-block" ng-show="orderForm.qty.$error.required">A block of help text that breaks onto a new line and may extend beyond one line.</span>
+        <span class="help-block" ng-show="orderForm.qty.$error.min">A different of help text that breaks onto a new line a</span>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-default" ng-click="ctrl.submitOrder()">Submit</button>
+    </div>
+
+</form>

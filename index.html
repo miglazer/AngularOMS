@@ -4,22 +4,19 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css"/>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.css"/>
-</head>
     <title>OMS</title>
 </head>
 <body>
-    <div class="jumbotron">
-        <div class="container">
-            <div class="col-xs-offset-2 col-xs-8">
-                <div ng-view></div>
-            </div>
-        </div>
-    </div>
+
+    <div ng-view></div>
 
     <script src="node_modules/angular/angular.js"></script>
     <script src="node_modules/angular-route/angular-route.js"></script>
     <script src="app/app.module.js"></script>
     <script src="app/login/login.controller.js"></script>
+    <script src="app/orders/order-form.directive.js"></script>
+    <script src="app/orders/order-list.directive.js"></script>
+    <script src="app/orders/orders.controller.js"></script>
 
 </body>
 </html>
