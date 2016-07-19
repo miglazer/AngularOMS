@@ -1,11 +1,13 @@
 (function(){
-  
   'use strict';
-  
-  var OrderService = function (){
+
+  angular.module('oms').service('OrderService', OrderService);
+
+  function OrderService($http) {
     this.websocket = undefined;
     this.callbacks = [];
-  };
+    this.$http = $http;
+  }
 
   OrderService.prototype = {
 
@@ -30,8 +32,11 @@
         this.websocket.close();
         this.websocket = undefined;
       }
+    },
+
+    submit: function (order) {
+      return this.$http.post('http://localhost:9000/orders', order);
     }
   };
-  
-  angular.module('oms').service('OrderService', OrderService);
+
 })();
