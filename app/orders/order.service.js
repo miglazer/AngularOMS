@@ -4,7 +4,7 @@
   angular.module('oms').service('OrderService', OrderService);
 
   function OrderService($http) {
-    this.websocket = undefined;
+    this.stomp = undefined;
     this.callbacks = [];
     this.$http = $http;
   }
@@ -14,13 +14,15 @@
     subscribe: function (onMessageCallback) {
       this.callbacks.push(onMessageCallback);
 
-      if (!this.websocket){
-        this.websocket = new WebSocket('ws://localhost:9000/ws');
-        this.websocket.onmessage = function (message) {
-          for (var i = 0; i < this.callbacks.length; i++){
+      if (!this.stomp){
+        this.stomp = Stomp.client('ws://localhost:9000/ws');
+        this.stomp.connect({}, function () {
+          this.stomp.subscribe("/topic/orderstatus", function (message) {
+            for (var i = 0; i < this.callbacks.length; i++){
               this.callbacks[i](message);
-          }
-        }.bind(this);
+            }
+          }.bind(this));
+        }.bind(this));
       }
     },
 
@@ -28,9 +30,10 @@
       var index = this.callbacks.indexOf(onMessageCallback);
       this.callbacks.splice(index, 1);
 
-      if (this.websocket && this.callbacks.length <= 0) {
-        this.websocket.close();
-        this.websocket = undefined;
+      if (this.stomp && this.callbacks.length <= 0) {
+        this.stomp.disconnect(function () {
+          this.stomp = undefined;
+        }.bind(this));
       }
     },
 
